@@ -151,6 +151,18 @@
   }
 
   function boot() {
+    // one-time bootstrap: ?t=<token> → store it, then strip it from the URL
+    try {
+      var params = new URLSearchParams(location.search);
+      var boot = (params.get('t') || '').trim();
+      if (boot) {
+        localStorage.setItem(TOKEN_KEY, boot);
+        params.delete('t');
+        var clean = location.pathname + (params.toString() ? '?' + params.toString() : '') + location.hash;
+        history.replaceState(null, '', clean);
+      }
+    } catch (e) { /* ignore */ }
+
     token = (localStorage.getItem(TOKEN_KEY) || '').trim();
     if (token) { showReset(true); load(); }
 
