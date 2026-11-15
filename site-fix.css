@@ -13,3 +13,13 @@ html.s123-ads-banner-active body { padding-bottom: 0 !important; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1 !important; transform: none !important; }
 }
+
+/* ===== قيّمنا على جوجل ===== */
+.review-cta{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,56px);align-items:center}
+.stars{display:flex;gap:6px;margin:16px 0 20px}
+.stars a{font-size:40px;line-height:1;color:#ffd400;text-decoration:none;transition:transform .2s ease,color .2s}
+.stars a:hover{transform:scale(1.14);color:#ffe45c}
+.review-cta__qr{margin:0;text-align:center}
+.review-cta__qr img{width:min(260px,72%);height:auto;background:#fff;padding:10px;border-radius:16px;border:1px solid rgba(255,255,255,.12)}
+.review-cta__qr figcaption{font-size:12.5px;color:#9b9b94;margin-top:10px;line-height:1.6}
+@media (max-width:900px){.review-cta{grid-template-columns:1fr}}
