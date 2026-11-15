@@ -4,10 +4,43 @@
 (function () {
   'use strict';
 
-  /* غيّر الإيميل من هنا لو حبيت */
+  /* ====== إعدادات الإرسال ======
+     اختار واحد:
+     1) Web3Forms (الأسهل): افتح web3forms.com → حط إيميلك → هيوصلك مفتاح → الصقه تحت.
+     2) Formspree: https://formspree.io/f/xxxxx → حط الـ ID.
+     3) سيبهم فاضيين: هيحاول FormSubmit على الإيميل، ولو فشل بيفتح واتساب. */
+  var WEB3FORMS_KEY = '';
+  var FORMSPREE_ID = '';
   var EMAIL = 'mr.alaaali@gmail.com';
-  var ENDPOINT = 'https://formsubmit.co/ajax/' + encodeURIComponent(EMAIL);
   var WA = '201096100820';
+
+  function endpoint() {
+    if (WEB3FORMS_KEY) return { url: 'https://api.web3forms.com/submit', kind: 'web3' };
+    if (FORMSPREE_ID) return { url: 'https://formspree.io/f/' + FORMSPREE_ID, kind: 'formspree' };
+    return { url: 'https://formsubmit.co/ajax/' + encodeURIComponent(EMAIL), kind: 'formsubmit' };
+  }
+
+  function payload(kind, data) {
+    if (kind === 'web3') {
+      return {
+        access_key: WEB3FORMS_KEY,
+        subject: data._subject,
+        from_name: 'Hamed Gym',
+        name: data.name,
+        phone: data.phone,
+        time: data.time,
+        source: data.source,
+      };
+    }
+    return data;
+  }
+
+  function isOk(kind, res) {
+    if (!res) return false;
+    if (kind === 'web3') return res.success === true;
+    if (kind === 'formspree') return res.ok !== false;
+    return res.success === 'true' || res.success === true;
+  }
 
   function statusEl(form) {
     return form.querySelector('[role="status"]') || document.getElementById('trialFormStatus');
@@ -76,17 +109,23 @@
     if (btn) btn.disabled = true;
     setStatus(form, 'بنبعت طلبك...', 'loading');
 
-    fetch(ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(data),
-    })
-      .then(function (r) { return r.json().catch(function () { return {}; }); })
-      .then(function (res) {
-        var ok = res && (res.success === 'true' || res.success === true);
-        if (!ok) throw new Error((res && res.message) || 'send failed');
-        showSuccess(form);
+    var ep = endpoint();
+
+    function send() {
+      return fetch(ep.url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload(ep.kind, data)),
       })
+        .then(function (r) { return r.json().catch(function () { return { ok: r.ok }; }); })
+        .then(function (res) {
+          if (!isOk(ep.kind, res)) throw new Error('send failed');
+          return res;
+        });
+    }
+
+    send()
+      .then(function () { showSuccess(form); })
       .catch(function () {
         if (btn) btn.disabled = false;
         var link = whatsappFallback(data);
