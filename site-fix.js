@@ -26,3 +26,10 @@
     }, 2500);
   });
 })();
+
+/* اختصار سري للوحة التحكم: Ctrl + Shift + A */
+document.addEventListener('keydown', function (e) {
+  if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+    window.location.href = 'admin/';
+  }
+});
