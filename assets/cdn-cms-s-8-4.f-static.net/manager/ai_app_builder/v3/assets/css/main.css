@@ -1,0 +1,160 @@
+/* Explain: Base reset and typography defaults for the studio site. */
+/* Hamed Gym — base, RTL foundation, motion */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+p { margin: 0; }
+
+ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+button { font: inherit; }
+
+::selection {
+    background: var(--accent-color);
+    color: var(--accent-contrast);
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Keep numerals LTR inside RTL text */
+.num {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+    direction: ltr;
+    unicode-bidi: embed;
+}
+
+.container-shell {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+}
+
+@media (min-width: 640px) {
+    .container-shell { padding-inline: 2rem; }
+}
+
+/* Film grain overlay */
+.grain {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Skip link */
+.skip-link {
+    position: fixed;
+    inset-inline-start: 1rem;
+    top: -4.5rem;
+    z-index: 100;
+    padding: 0.8rem 1.3rem;
+    border-radius: 999px;
+    background: var(--accent-color);
+    color: var(--accent-contrast);
+    font-weight: 700;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+.link-accent { color: var(--accent-color); }
+.link-accent:hover { color: var(--primary-hover); }
+
+/* Scroll reveal (only when JS is available) */
+.js .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.js .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 767px) {
+    body { padding-bottom: 4.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    .js .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .marquee__track { animation: none !important; }
+
+    .hero__dot { animation: none !important; }
+
+    .btn,
+    .feature-card,
+    .area-card,
+    .plan-card,
+    .gallery-tile img { transition: none !important; }
+
+    .btn:hover,
+    .feature-card:hover,
+    .area-card:hover,
+    .plan-card:hover { transform: none !important; }
+
+    .gallery-tile:hover img { transform: none !important; }
+}

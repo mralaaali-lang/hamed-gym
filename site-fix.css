@@ -1,0 +1,15 @@
+/* Small patches for the mirrored site — keeps the original design intact. */
+:root { color-scheme: dark; }
+
+/* no Site123 promo leftovers */
+#showSmallAdOnScroll,
+.upgrade-website-preview-helper,
+.s123-ads-banner,
+[class*="ads-banner"] { display: none !important; }
+
+html.s123-ads-banner-active body { padding-bottom: 0 !important; }
+
+/* keep scroll-reveal content visible when motion is reduced */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; }
+}

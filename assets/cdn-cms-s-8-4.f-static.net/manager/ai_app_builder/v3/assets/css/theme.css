@@ -1,0 +1,47 @@
+/* Explain: Theme tokens for the Hamed Gym identity with updated colors and fonts. */
+:root {
+    /* Brand */
+    --primary-color: #FFD400;
+    --primary-hover: #E8BE00;
+    --secondary-color: #17181A;
+    --accent-color: #FFD400;
+    --accent-contrast: #0A0A0B;
+    --logo-subtitle-color: #9DA0A6;
+    --button-color: #FFD400;
+
+    /* Surfaces */
+    --background-color: #0A0A0B;
+    --surface-color: #151517;
+    --surface-2: #1C1D20;
+    --footer-bg: #0D0D0F;
+
+    /* Text */
+    --text-color: #F5F5F0;
+    --text-muted: #9DA0A6;
+
+    /* Lines / glass */
+    --border-color: rgba(245, 245, 240, 0.10);
+    --glass-bg: rgba(21, 21, 23, 0.72);
+    --glass-border: rgba(245, 245, 240, 0.13);
+    --nav-bg: rgba(10, 10, 11, 0.82);
+    --field-bg: rgba(255, 255, 255, 0.05);
+
+    /* Accent tints */
+    --accent-soft: rgba(255, 212, 0, 0.12);
+    --accent-soft-2: rgba(255, 212, 0, 0.18);
+
+    /* Radii */
+    --radius-sm: 0.625rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.375rem;
+    --radius-pill: 999px;
+
+    /* Shadows */
+    --shadow-soft: 0 24px 70px rgba(0, 0, 0, 0.5);
+    --shadow-button: 0 14px 36px rgba(255, 212, 0, 0.18);
+
+    /* Type */
+    --font-heading: 'Cairo', 'Almarai', sans-serif;
+    --font-body: 'Almarai', 'Cairo', sans-serif;
+    --font-logo: 'Cairo', sans-serif;
+}
