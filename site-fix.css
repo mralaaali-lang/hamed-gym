@@ -23,3 +23,10 @@ html.s123-ads-banner-active body { padding-bottom: 0 !important; }
 .review-cta__qr img{width:min(260px,72%);height:auto;background:#fff;padding:10px;border-radius:16px;border:1px solid rgba(255,255,255,.12)}
 .review-cta__qr figcaption{font-size:12.5px;color:#9b9b94;margin-top:10px;line-height:1.6}
 @media (max-width:900px){.review-cta{grid-template-columns:1fr}}
+
+/* ===== قيّمنا على جوجل (جوه قسم المكان) ===== */
+.location-review .review-toggle{background:none;border:0;padding:0;font:inherit;color:#ffd400;font-weight:800;cursor:pointer;text-align:start}
+.location-review .review-toggle:hover{text-decoration:underline}
+.review-qr{display:flex;gap:14px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.review-qr img{width:120px;height:120px;background:#fff;padding:8px;border-radius:12px;border:1px solid rgba(255,255,255,.12)}
+.review-qr p{font-size:12.5px;color:#9b9b94;max-width:36ch;margin:0;line-height:1.6}

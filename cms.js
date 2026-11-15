@@ -4,6 +4,8 @@
   'use strict';
 
   var DEFAULTS = {
+    rating_value: '4.2',
+    rating_count: '54',
     hero_title_highlight: 'وقت ما انت فاضي',
     hero_text: 'Hamed Gym في قلب حدائق المعادي — مفتوح 24 ساعة، 7 أيام في الأسبوع. قاعة أوزان ومنطقة كارديو، وفي مدرب يساعدك من أول يوم.',
     phone_display: '010 96100820',

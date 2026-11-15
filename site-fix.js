@@ -33,3 +33,15 @@ document.addEventListener('keydown', function (e) {
     window.location.href = 'admin/';
   }
 });
+/* زر عرض كود المراجعة في قسم المكان */
+(function () {
+  var t = document.getElementById('reviewToggle');
+  var q = document.getElementById('reviewQr');
+  if (!t || !q) return;
+  t.addEventListener('click', function () {
+    var open = q.hidden;
+    q.hidden = !open;
+    t.setAttribute('aria-expanded', open ? 'true' : 'false');
+    t.textContent = open ? 'إخفاء الكود' : 'اضغط لعرض كود المراجعة';
+  });
+})();

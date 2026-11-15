@@ -10,6 +10,8 @@
   var TOKEN_KEY = 'hg_admin_token';
 
   var FIELDS = [
+    { id: 'rating_value', label: 'تقييم جوجل (مثال 4.2)', type: 'text' },
+    { id: 'rating_count', label: 'عدد المراجعات', type: 'text' },
     { id: 'hero_title_highlight', label: 'الهيرو — الجزء الأصفر', type: 'text' },
     { id: 'hero_text', label: 'الهيرو — النص التعريفي', type: 'textarea' },
     { id: 'phone_display', label: 'رقم التليفون (كما يظهر)', type: 'text' },
