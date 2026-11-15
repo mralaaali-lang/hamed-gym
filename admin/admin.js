@@ -103,8 +103,24 @@
         setStatus($('status'), '');
       })
       .catch(function (e) {
-        setStatus($('authStatus'), 'مش قادر أقرأ الملف: ' + e.message, 'err');
+        var msg = e.message || '';
+        if (msg.indexOf('401') !== -1) {
+          msg = 'التوكن مرفوض (401). اتأكد إنك نسخته كامل من غير مسافات، وإنه Fine-grained وفيه صلاحية Contents: Read and write على ريبو hamed-gym.';
+          localStorage.removeItem(TOKEN_KEY);
+          token = '';
+          $('token').value = '';
+        } else if (msg.indexOf('404') !== -1) {
+          msg = 'مش لاقي content.json في الريبو — تأكد إن الريبو hamed-gym والبرانش main.';
+        }
+        setStatus($('authStatus'), msg, 'err');
+        showReset();
       });
+  }
+
+  function showReset(on) {
+    var b = $('clearToken');
+    if (!b) return;
+    b.classList.toggle('hidden', !on);
   }
 
   function save() {
@@ -135,15 +151,28 @@
   }
 
   function boot() {
-    token = localStorage.getItem(TOKEN_KEY) || '';
-    if (token) load();
+    token = (localStorage.getItem(TOKEN_KEY) || '').trim();
+    if (token) { showReset(true); load(); }
 
     $('saveToken').addEventListener('click', function () {
-      var v = $('token').value.trim();
-      if (v.length < 20) { setStatus($('authStatus'), 'التوكن قصير — تأكد إنك نسخته كامل.', 'err'); return; }
+      var v = ($('token').value || '').trim().replace(/\s+/g, '');
+      if (!/^(github_pat_|ghp_|gho_|ghu_|ghs_|ghr_)/.test(v)) {
+        setStatus($('authStatus'), 'ده مش شكل توكن GitHub — المفروض يبدأ بـ github_pat_ أو ghp_.', 'err');
+        return;
+      }
+      if (v.length < 30) { setStatus($('authStatus'), 'التوكن قصير — تأكد إنك نسخته كامل.', 'err'); return; }
       token = v;
       localStorage.setItem(TOKEN_KEY, token);
       load();
+    });
+
+    var clear = $('clearToken');
+    if (clear) clear.addEventListener('click', function () {
+      localStorage.removeItem(TOKEN_KEY);
+      token = '';
+      $('token').value = '';
+      showReset(false);
+      setStatus($('authStatus'), 'اتمسح — الصق توكن جديد.', '');
     });
 
     $('save').addEventListener('click', save);
